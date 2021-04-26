@@ -1,0 +1,7 @@
+module.exports = {
+  ACCESS_TOKEN: '12345678',
+  GROUP_ID: '12345678',
+  VERSION: '5.130', // Do not change
+  UTILS_ACCESS_TOKEN: '12345678',
+  UTILS_GROUP_ID: '12345678'
+}
