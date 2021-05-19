@@ -5,6 +5,7 @@ const events = require('./events/index.js')
 const path = require('path')
 
 const onlineEnabler = require('./background-tasks/online-enabler/index.js')
+const autoPoster = require('./background-tasks/auto-poster/index.js')
 
 axios.defaults.baseURL = 'https://api.vk.com/method/'
 axios.defaults.params = {
@@ -128,6 +129,7 @@ async function main () {
   }
 
   onlineEnabler()
+  autoPoster()
 }
 
 main()

@@ -1,22 +1,32 @@
 const axios = require('axios')
 const env = require('./../../../env.js')
 
-module.exports = async function onlineEnabler () {
-  /**
-   * @returns {void}
-   */
-  async function groupsEnableOnline () {
-    axios.get('groups.enableOnline', {
+module.exports = function onlineEnabler () {
+  async function groupsGetOnlineStatus () {
+    return axios.get('groups.getOnlineStatus', {
       params: {
         group_id: `${env.GROUP_ID}`
       }
     })
   }
 
-  const SEC = 1000
-  const MIN = SEC * 60
-  const HOUR = MIN * 60
+  async function groupsEnableOnline () {
+    return axios.get('groups.enableOnline', {
+      params: {
+        group_id: `${env.GROUP_ID}`
+      }
+    })
+  }
 
-  groupsEnableOnline()
-  setInterval(groupsEnableOnline, HOUR * 4)
+  async function onlineEnablerTick () {
+    const { data: { response: { status } } } = await groupsGetOnlineStatus()
+
+    if (status === 'none') {
+      await groupsEnableOnline()
+    }
+
+    setTimeout(onlineEnablerTick, 60000)
+  }
+
+  onlineEnablerTick()
 }

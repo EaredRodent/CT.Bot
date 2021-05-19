@@ -202,7 +202,7 @@ function getBoardPostAction (eventType, groupId, topicId, commentId, initiatorNa
 
   return `${initiatorName} ${actionName} the board post ${path}
   
-  ${shortText}`
+  Text: ${shortText}`
 }
 
 const eventMessages = {
