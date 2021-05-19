@@ -1,7 +1,7 @@
 const axios = require('axios')
 const env = require('./../../env.js')
 
-const FROM_POST = 91
+const FROM_POST = 2
 
 axios.defaults.baseURL = 'https://api.vk.com/method/'
 axios.defaults.params = {
@@ -30,7 +30,7 @@ function wallDelete (post_id) {
 }
 
 (async function init () {
-  const { data: { response: { posts } } } = await wallGet()
+  const { data: { response: { items: posts } } } = await wallGet()
 
   ;(function nextPost (sleep = 0) {
     setTimeout(async () => {
